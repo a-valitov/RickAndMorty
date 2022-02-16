@@ -6,4 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
+    <ImageView
+        android:id="@+id/iv_details_picture"
+        android:layout_width="@dimen/details_picture_size"
+        android:layout_height="@dimen/details_picture_size"
+        android:layout_marginTop="@dimen/details_picture_marginTop"
+        android:contentDescription="character's picture"
+        android:src="@drawable/ic_character_placeholder"
+        android:text="character's picture"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_details_name"
+        />
+
+    <TextView
+        android:id="@+id/tv_details_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginRight="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginTop="@dimen/details_first_tv_marginTop"
+        android:text="NAME"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintTop_toBottomOf="@id/iv_details_picture"
+      />
+
+    <TextView
+        android:id="@+id/tv_details_location_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginRight="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="LOCATION"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintTop_toBottomOf="@id/tv_details_name"
+        />
+
+    <TextView
+        android:id="@+id/tv_details_species"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginRight="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="SPECIES"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintTop_toBottomOf="@id/tv_details_location_name"
+        />
+
+    <TextView
+        android:id="@+id/tv_details_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginRight="@dimen/details_textviews_marginLeftRight"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="STATUS"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintTop_toBottomOf="@id/tv_details_species"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

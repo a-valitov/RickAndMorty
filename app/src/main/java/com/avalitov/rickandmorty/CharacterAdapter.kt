@@ -47,12 +47,12 @@ class CharacterAdapter(private val characters: ArrayList<Character>)
             .placeholder(R.drawable.ic_character_placeholder)
             .error(R.drawable.ic_character_placeholder)
             .circleCrop()
-            .into(holder.ivPicture);
+            .into(holder.ivPicture)
 
         holder.cvCharacter.setOnClickListener { view ->
-            val message = "kek $position" //editText.text.toString()
+            val character = characters[position]
             val intent = Intent(view.context, DetailsActivity::class.java).apply {
-                putExtra("EXTRA_MESSAGE", message)
+                putExtra("selected character", character)
             }
             startActivity(view.context, intent, null)
         }
