@@ -6,8 +6,9 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/ic_character_placeholder.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13177083333333334" />
-        <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.19010416666666666" />
+        <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.5685104370117188" />
       </map>
     </option>
   </component>
