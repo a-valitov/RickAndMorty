@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_standard">8dp</dimen>
+    <dimen name="rv_item_textview_marginTop">2dp</dimen>
+    <dimen name="rv_item_textview_paddingLeftRight">2dp</dimen>
+    <dimen name="character_picture_size">64dp</dimen>
+</resources>
