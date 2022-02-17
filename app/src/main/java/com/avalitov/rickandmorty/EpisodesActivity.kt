@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.avalitov.rickandmorty.adapters.EpisodeAdapter
+import com.avalitov.rickandmorty.model.Episode
 import com.avalitov.rickandmorty.response.EpisodesResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,12 +20,12 @@ class EpisodesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_episodes)
 
-        val characterId = intent.extras?.get("character Id") as Int
+        val characterId = intent.extras?.get("character Id") as String
 
         getEpisodesWithCharacter(characterId)
     }
 
-    private fun getEpisodesWithCharacter(id: Int) {
+    private fun getEpisodesWithCharacter(id: String) {
         // TODO: while (next != null)
 
         val retrofitBuilder = Retrofit.Builder()
@@ -38,13 +39,19 @@ class EpisodesActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<EpisodesResponse?> {
 
             override fun onResponse(call: Call<EpisodesResponse?>, response: Response<EpisodesResponse?>) {
-                val episodesArrayList = response.body()?.results
+                var episodesArrayList : List<Episode>? = response.body()?.results
+
                 if (episodesArrayList != null) {
+
+                    // Taking only these Episodes where picked Character appears
+                    episodesArrayList = episodesArrayList
+                        .filter { it.characters.contains(FILTER_TEMPLATE + id) }
+
                     val recyclerView: RecyclerView = findViewById(R.id.rv_episodes)
                     recyclerView.layoutManager = LinearLayoutManager(this@EpisodesActivity)
                     recyclerView.adapter = EpisodeAdapter(episodesArrayList)
                 } else {
-                    Toast.makeText(this@EpisodesActivity, "Episodes not found.", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@EpisodesActivity, "Episodes not found.", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -56,5 +63,6 @@ class EpisodesActivity : AppCompatActivity() {
 
     companion object {
         const val BASE_URL = "https://rickandmortyapi.com/api/"
+        const val FILTER_TEMPLATE = BASE_URL + "character/"
     }
 }

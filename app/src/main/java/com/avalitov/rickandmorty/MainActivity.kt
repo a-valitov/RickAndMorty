@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                     recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                     recyclerView.adapter = CharacterAdapter(charactersArrayList)
                 } else {
-                    Toast.makeText(this@MainActivity, "Characters not found.", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@MainActivity, "Characters not found.", Toast.LENGTH_SHORT).show()
                     }
             }
 

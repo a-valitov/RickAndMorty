@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.avalitov.rickandmorty.model.Character
 import com.bumptech.glide.Glide
@@ -21,9 +20,7 @@ class DetailsActivity : AppCompatActivity() {
 
         // Getting the character from the intent
         character = intent.extras?.get("selected character") as Character
-        // TODO: remove test output
-        Toast.makeText(this, character.toString(), Toast.LENGTH_LONG).show()
-
+        
         val ivPicture : ImageView = findViewById(R.id.iv_details_picture)
         val tvName : TextView = findViewById(R.id.tv_details_name)
         val tvLocation : TextView = findViewById(R.id.tv_details_location_name)

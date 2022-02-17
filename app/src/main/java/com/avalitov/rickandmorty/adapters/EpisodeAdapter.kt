@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.avalitov.rickandmorty.R
 import com.avalitov.rickandmorty.model.Episode
 
-class EpisodeAdapter(private val episodes: ArrayList<Episode>)
+class EpisodeAdapter(private val episodes: List<Episode>)
     : RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder>() {
 
     class EpisodeViewHolder(itemView : View)
