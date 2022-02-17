@@ -1,4 +1,4 @@
-package com.avalitov.rickandmorty
+package com.avalitov.rickandmorty.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.avalitov.rickandmorty.DetailsActivity
+import com.avalitov.rickandmorty.R
 import com.avalitov.rickandmorty.model.Character
 import com.bumptech.glide.Glide
 import com.bumptech.glide.annotation.GlideModule
@@ -27,15 +29,15 @@ class CharacterAdapter(private val characters: ArrayList<Character>)
     class CharacterViewHolder(itemView : View)
         : RecyclerView.ViewHolder(itemView) {
         var cvCharacter : CardView = itemView.findViewById(R.id.cv_character)
-        var tvName: TextView = itemView.findViewById(R.id.tv_name)
-        var ivPicture : ImageView = itemView.findViewById(R.id.iv_picture)
+        var tvName: TextView = itemView.findViewById(R.id.tv_character_name)
+        var ivPicture : ImageView = itemView.findViewById(R.id.iv_character_picture)
 
         //init {}
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.recyclerview_item, parent, false)
+                .inflate(R.layout.rv_item_character, parent, false)
         return CharacterViewHolder(itemView)
     }
 

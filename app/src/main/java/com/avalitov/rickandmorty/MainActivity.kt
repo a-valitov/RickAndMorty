@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.avalitov.rickandmorty.adapters.CharacterAdapter
 import com.avalitov.rickandmorty.model.Character
 import com.avalitov.rickandmorty.response.CharactersResponse
 import retrofit2.Call

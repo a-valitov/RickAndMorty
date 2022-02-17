@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    android:id="@+id/cv_character"
+    android:id="@+id/cv_episode"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,8 +11,8 @@
     >
 
     <LinearLayout
-        android:id="@+id/ll_characterItem"
-        android:orientation="horizontal"
+        android:id="@+id/ll_episodeItem"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
@@ -20,18 +20,8 @@
         android:background="@color/cardview_light_background"
         >
 
-        <ImageView
-            android:id="@+id/iv_picture"
-            android:layout_width="@dimen/character_picture_size"
-            android:layout_height="@dimen/character_picture_size"
-            android:layout_marginTop="2dp"
-            android:src="@drawable/ic_character_placeholder"
-            android:contentDescription="character's picture"
-            android:text="character's picture"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_episode_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -39,6 +29,18 @@
             android:paddingRight="@dimen/rv_item_textview_paddingLeftRight"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="NAME"
+            />
+
+        <TextView
+            android:id="@+id/tv_episode_airDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:paddingLeft="@dimen/rv_item_textview_paddingLeftRight"
+            android:paddingRight="@dimen/rv_item_textview_paddingLeftRight"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="AIR DATE"
             />
 
     </LinearLayout>

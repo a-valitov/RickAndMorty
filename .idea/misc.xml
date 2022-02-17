@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/activity_episodes.xml" value="0.16304347826086957" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.35034013605442177" />
+        <entry key="app/src/main/res/layout/rv_item_episode.xml" value="0.19010416666666666" />
       </map>
     </option>
   </component>
