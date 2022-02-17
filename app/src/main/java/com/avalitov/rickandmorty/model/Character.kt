@@ -5,6 +5,7 @@ import android.os.Parcelable
 import retrofit2.http.Url
 
 data class Character (
+    val id : Int?,
     val name : String?,
     val image : String?,  // url
     val location : Location?,
@@ -12,6 +13,7 @@ data class Character (
     val status : String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readString(),
         parcel.readParcelable(Location::class.java.classLoader),
@@ -21,6 +23,7 @@ data class Character (
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
         parcel.writeString(name)
         parcel.writeString(image)
         parcel.writeParcelable(location, flags)

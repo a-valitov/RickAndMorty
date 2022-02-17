@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
+    <string name="button_show_episodes_text">SHOW EPISODES</string>
 </resources>

@@ -73,4 +73,16 @@
         app:layout_constraintTop_toBottomOf="@id/tv_details_species"
         />
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/details_button_marginBottom"
+        android:text="@string/button_show_episodes_text"
+        android:onClick="onClickShowEpisodes"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
