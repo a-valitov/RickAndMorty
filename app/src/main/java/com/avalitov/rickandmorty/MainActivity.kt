@@ -19,8 +19,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 var charactersArrayList = arrayListOf<Character>()
-var currentPage : Int = 1
-lateinit var recyclerView : RecyclerView
+private var currentPage : Int = 1
+private lateinit var recyclerView : RecyclerView
 lateinit var progressBar : ProgressBar
 
 class MainActivity : AppCompatActivity() {

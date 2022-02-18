@@ -15,6 +15,8 @@ interface ApiInterface {
     ) : Call<CharactersResponse>
 
     @GET("episode")
-    fun getEpisodes() : Call<EpisodesResponse>
+    fun getEpisodesAtPage(
+        @Query("page") page:Int
+    ) : Call<EpisodesResponse>
 
 }

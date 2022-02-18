@@ -15,6 +15,10 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+private var episodesArrayList = ArrayList<Episode>()
+private var currentPage : Int = 1
+private lateinit var recyclerView : RecyclerView
+
 class EpisodesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +26,20 @@ class EpisodesActivity : AppCompatActivity() {
 
         val characterId = intent.extras?.get("character Id") as String
 
-        getEpisodesWithCharacter(characterId)
+        recyclerView = findViewById(R.id.rv_episodes)
+        recyclerView.layoutManager = LinearLayoutManager(this@EpisodesActivity)
+        recyclerView.adapter = EpisodeAdapter(episodesArrayList)
+
+        while (currentPage <= 3) {
+            getEpisodesWithCharacter(characterId)
+            currentPage++
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        currentPage = 1
+        episodesArrayList.clear()
     }
 
     private fun getEpisodesWithCharacter(id: String) {
@@ -34,22 +51,28 @@ class EpisodesActivity : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getEpisodes()
+        val retrofitData = retrofitBuilder.getEpisodesAtPage(currentPage)
 
         retrofitData.enqueue(object : Callback<EpisodesResponse?> {
 
             override fun onResponse(call: Call<EpisodesResponse?>, response: Response<EpisodesResponse?>) {
-                var episodesArrayList : List<Episode>? = response.body()?.results
+                val responseBody = response.body()?.results
+//                if (responseBody != null) {
+//                    episodesArrayList.addAll(responseBody)
+//
+//                }
 
-                if (episodesArrayList != null) {
+
+
+                if (responseBody != null) {
 
                     // Taking only these Episodes where picked Character appears
-                    episodesArrayList = episodesArrayList
+                    val newEpisodesArrayList = responseBody
                         .filter { it.characters.contains(FILTER_TEMPLATE + id) }
+                            as ArrayList<Episode>
 
-                    val recyclerView: RecyclerView = findViewById(R.id.rv_episodes)
-                    recyclerView.layoutManager = LinearLayoutManager(this@EpisodesActivity)
-                    recyclerView.adapter = EpisodeAdapter(episodesArrayList)
+                    episodesArrayList.addAll(newEpisodesArrayList)
+                    recyclerView.adapter?.notifyDataSetChanged()
                 } else {
                     Toast.makeText(this@EpisodesActivity, "Episodes not found.", Toast.LENGTH_SHORT).show()
                 }
@@ -64,5 +87,6 @@ class EpisodesActivity : AppCompatActivity() {
     companion object {
         const val BASE_URL = "https://rickandmortyapi.com/api/"
         const val FILTER_TEMPLATE = BASE_URL + "character/"
+        const val PAGE_SIZE = 20
     }
 }
