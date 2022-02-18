@@ -9,4 +9,6 @@
     <dimen name="details_textviews_marginLeftRight">24dp</dimen>
     <dimen name="details_first_tv_marginTop">24dp</dimen>
     <dimen name="details_button_marginBottom">24dp</dimen>
+    <dimen name="characters_progressbar_size">64dp</dimen>
+    <dimen name="characters_progressbar_marginBottom">24dp</dimen>
 </resources>

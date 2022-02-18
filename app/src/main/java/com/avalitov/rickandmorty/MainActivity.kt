@@ -3,6 +3,8 @@ package com.avalitov.rickandmorty
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,12 +21,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 var charactersArrayList = arrayListOf<Character>()
 var currentPage : Int = 1
 lateinit var recyclerView : RecyclerView
+lateinit var progressBar : ProgressBar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        progressBar = findViewById(R.id.pb_characters_loading)
         recyclerView = findViewById(R.id.rv_characters)
         recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
         recyclerView.adapter = CharacterAdapter(charactersArrayList)
@@ -44,7 +48,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCharacters() {
+        progressBar.visibility = View.VISIBLE
 
+        // TODO : Move from function
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
@@ -65,6 +71,8 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this@MainActivity, "Characters not found.", Toast.LENGTH_SHORT).show()
                     }
+
+                progressBar.visibility = View.INVISIBLE
             }
 
             override fun onFailure(call: Call<CharactersResponse?>, t: Throwable) {
