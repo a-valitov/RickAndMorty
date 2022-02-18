@@ -2,11 +2,13 @@
 <resources>
     <dimen name="margin_standard">8dp</dimen>
     <dimen name="rv_item_textview_marginTop">2dp</dimen>
-    <dimen name="rv_item_textview_paddingLeftRight">2dp</dimen>
+    <dimen name="rv_item_textview_paddingLeftRight">12dp</dimen>
     <dimen name="character_picture_size">64dp</dimen>
     <dimen name="details_picture_size">256dp</dimen>
     <dimen name="details_picture_marginTop">72dp</dimen>
     <dimen name="details_textviews_marginLeftRight">24dp</dimen>
     <dimen name="details_first_tv_marginTop">24dp</dimen>
     <dimen name="details_button_marginBottom">24dp</dimen>
+    <dimen name="characters_progressbar_size">64dp</dimen>
+    <dimen name="characters_progressbar_marginBottom">24dp</dimen>
 </resources>

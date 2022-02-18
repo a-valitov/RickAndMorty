@@ -19,4 +19,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/pb_characters_loading"
+        android:layout_width="@dimen/characters_progressbar_size"
+        android:layout_height="@dimen/characters_progressbar_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/characters_progressbar_marginBottom"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
