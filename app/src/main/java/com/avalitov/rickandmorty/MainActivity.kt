@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.avalitov.rickandmorty.adapters.CharacterAdapter
 import com.avalitov.rickandmorty.model.Character
 import com.avalitov.rickandmorty.response.CharactersResponse
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 var charactersArrayList = arrayListOf<Character>()
+var currentPage = 1
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         getCharacters()
+
+        val fab : FloatingActionButton = findViewById(R.id.fab_load)
+        fab.setOnClickListener { getCharacters() }
     }
 
     private fun getCharacters() {
@@ -33,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getCharacters()
+        val retrofitData = retrofitBuilder.getCharactersAtPage(currentPage)
 
         retrofitData.enqueue(object : Callback<CharactersResponse?> {
 
@@ -44,6 +49,10 @@ class MainActivity : AppCompatActivity() {
                     val recyclerView: RecyclerView = findViewById(R.id.rv_characters)
                     recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                     recyclerView.adapter = CharacterAdapter(charactersArrayList)
+
+                    if (response.body()!!.info.next != null) {
+                        currentPage ++
+                    }
                 } else {
                     Toast.makeText(this@MainActivity, "Characters not found.", Toast.LENGTH_SHORT).show()
                     }
