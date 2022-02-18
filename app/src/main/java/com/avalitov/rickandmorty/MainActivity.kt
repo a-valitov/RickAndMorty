@@ -17,7 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 var charactersArrayList = arrayListOf<Character>()
-var currentPage = 1
+var currentPage : Int = 1
 lateinit var recyclerView : RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -31,9 +31,16 @@ class MainActivity : AppCompatActivity() {
 
         getCharacters()
 
-        // TODO : Remove test FAB
-        val fab : FloatingActionButton = findViewById(R.id.fab_load)
-        fab.setOnClickListener { getCharacters() }
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)){
+                    currentPage++
+                    getCharacters()
+                }
+            }
+
+        })
     }
 
     private fun getCharacters() {
@@ -55,9 +62,6 @@ class MainActivity : AppCompatActivity() {
                     charactersArrayList.addAll(responseBody)
                     recyclerView.adapter?.notifyDataSetChanged()
 
-                    if (response.body()!!.info.next != null) {
-                        currentPage ++
-                    }
                 } else {
                     Toast.makeText(this@MainActivity, "Characters not found.", Toast.LENGTH_SHORT).show()
                     }
