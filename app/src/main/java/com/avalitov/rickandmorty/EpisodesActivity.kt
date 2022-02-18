@@ -30,10 +30,11 @@ class EpisodesActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this@EpisodesActivity)
         recyclerView.adapter = EpisodeAdapter(episodesArrayList)
 
-        while (currentPage <= 3) {
+        // TODO : Yeah, I know it's stupid and hardcoding. More cool would be checking each response's "next" field
+        while (currentPage <= PAGES) {
             getEpisodesWithCharacter(characterId)
             currentPage++
-        }
+       }
     }
 
     override fun onDestroy() {
@@ -43,50 +44,50 @@ class EpisodesActivity : AppCompatActivity() {
     }
 
     private fun getEpisodesWithCharacter(id: String) {
-        // TODO: while (next != null)
-
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getEpisodesAtPage(currentPage)
+            val retrofitData = retrofitBuilder.getEpisodesAtPage(currentPage)
 
-        retrofitData.enqueue(object : Callback<EpisodesResponse?> {
-
-            override fun onResponse(call: Call<EpisodesResponse?>, response: Response<EpisodesResponse?>) {
-                val responseBody = response.body()?.results
-//                if (responseBody != null) {
-//                    episodesArrayList.addAll(responseBody)
-//
-//                }
-
-
-
-                if (responseBody != null) {
-
-                    // Taking only these Episodes where picked Character appears
-                    val newEpisodesArrayList = responseBody
-                        .filter { it.characters.contains(FILTER_TEMPLATE + id) }
-                            as ArrayList<Episode>
-
-                    episodesArrayList.addAll(newEpisodesArrayList)
-                    recyclerView.adapter?.notifyDataSetChanged()
-                } else {
-                    Toast.makeText(this@EpisodesActivity, "Episodes not found.", Toast.LENGTH_SHORT).show()
+            retrofitData.enqueue(object : Callback<EpisodesResponse?> {
+                override fun onResponse(
+                    call: Call<EpisodesResponse?>,
+                    response: Response<EpisodesResponse?>
+                ) {
+                    val responseBody = response.body()?.results
+                    if (responseBody != null) {
+                        // Taking only these Episodes where picked Character appears
+                        val newEpisodesArrayList = responseBody
+                            .filter { it.characters.contains(FILTER_TEMPLATE + id) }
+                                as ArrayList<Episode>
+                        episodesArrayList.addAll(newEpisodesArrayList)
+                        recyclerView.adapter?.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(
+                            this@EpisodesActivity,
+                            "Episodes not found.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<EpisodesResponse?>, t: Throwable) {
-                Log.d("EpisodesActivity", "onFailure: " + t.message)
-            }
+                override fun onFailure(call: Call<EpisodesResponse?>, t: Throwable) {
+                    //Log.d("EpisodesActivity", "onFailure: " + t.message)
+                    Toast.makeText(
+                        this@EpisodesActivity,
+                        "No response from server. Please check your internet connection.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
         })
     }
 
     companion object {
         const val BASE_URL = "https://rickandmortyapi.com/api/"
         const val FILTER_TEMPLATE = BASE_URL + "character/"
-        const val PAGE_SIZE = 20
+        const val PAGES = 3
     }
 }

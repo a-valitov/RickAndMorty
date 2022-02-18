@@ -76,7 +76,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<CharactersResponse?>, t: Throwable) {
-                Log.d("MainActivity", "onFailure: " + t.message)
+                //Log.d("MainActivity", "onFailure: " + t.message)
+                Toast.makeText(
+                    this@MainActivity,
+                    "No response from server. Please check your internet connection.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
